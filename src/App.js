@@ -1,18 +1,22 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AllPostTitles from './AllPostTitles';
-import PostDetail from './PostDetail'; 
+import { Provider } from 'react-redux'; // Import Provider
+import store from './redux/store'; // Import your Redux store
 
-function App() {
+import PostsList from './components/PostsList';
+import PostDetails from './components/PostDetails';
+
+const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<AllPostTitles />} />
-        <Route path="/post/:postId" element={<PostDetail />} /> {/* Add route for post detail */}
-      </Routes>
-    </Router>
+    <Provider store={store}> {/* Wrap your entire application with Provider */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<PostsList />} />
+          <Route path="/post/:postId" element={<PostDetails />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
-}
+};
 
 export default App;
